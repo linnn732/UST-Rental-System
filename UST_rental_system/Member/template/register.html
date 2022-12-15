@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}註冊{% endblock %}
+
+{% block content %}
+
+<h1>AuthDev</h1>
+<h3>註冊</h3>
+<!-- 註冊成功MODAL BEGIN -->
+<div class="modal fade" id="successful_submit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">註冊成功</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- 註冊成功MODAL END -->
+
+<!-- 註冊FORM BEGIN -->
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <label class="form-label">{{ form.email.label }}</label>
+        {{ form.email }}
+    </div>
+    <div class="row">
+        <label class="form-label">{{ form.password.label }}</label>
+        {{ form.password }}
+    </div>
+    <div class="row">
+        <label class="form-label">{{ form.name.label }}</label>
+        {{ form.name }}
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <label class="form-label">{{ form.school_id.label }}</label>
+            {{ form.school_id }}
+        </div>
+        <div class="col-6">
+            <label class="form-label">{{ form.identity.label }}</label>
+            {{ form.identity }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-md-4">
+            <label class="form-label">{{ form.sex.label }}</label>
+            {{ form.sex }}
+        </div>
+        <div class="col-6 col-md-4">
+            <label class="form-label">{{ form.birthday.label }}</label>
+            {{ form.birthday }}
+        </div>
+        <div class="col-6 col-md-4">
+            <label class="form-label">{{ form.tel.label }}</label>
+            {{ form.tel }}
+        </div>
+    </div>
+    <div class="row">
+        <label class="form-label">{{ form.image.label }}</label>
+        {{ form.image }}
+    </div>
+
+    <br />
+    <input class="btn btn-success" type="submit" value="註冊" />
+</form>
+<!-- 註冊FORM END -->
+
+<!-- 註冊成功MODAL BEGIN -->
+{% if successful_submit %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#successful_submit_modal").modal('show');
+        });
+    </script>
+{% endif %}
+<!-- 註冊成功MODAL END -->
+
+{% endblock  %}
