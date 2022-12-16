@@ -16,6 +16,7 @@ class School(models.Model):
     
     class Meta:
         db_table = 'school'
+        managed=False
 
 
 class Member(models.Model):
@@ -37,3 +38,4 @@ class Member(models.Model):
     
     class Meta:
         db_table = 'member'
+        managed=False
