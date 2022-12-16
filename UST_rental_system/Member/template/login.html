@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+        <div container>
+            <div class="row">
+                <form action="" method="POST">
+                    <div class="col-md-8 offset-md-2 text-center">
+                        <h3>登入</h3>
+                    </div>
+                    
+                    {% if messages %}
+                        <div class="row">
+                        <div class="">
+                            {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}" role="alert">
+                                <p>{{ message }}</p>
+                            </div>
+                            {% endfor %}
+                            </div>
+
+                        </div>
+                    {% endif %}
+
+                    <div class="col-md-8 offset-md-2 text-start">
+                        <div class="row">
+                            <label class="form-label">{{ form.email.label }}</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="row">
+                            <label class="form-label">{{ form.password.label }}</label>
+                            {{ form.password }}
+                        </div>
+                        <input class="btn btn-success" type="submit" value="登入" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+{% endblock  %}
+
+
+
+
+
+

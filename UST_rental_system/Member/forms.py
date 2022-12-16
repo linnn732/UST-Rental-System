@@ -36,4 +36,19 @@ class MemberModelForm(forms.ModelForm):
             'image': '個人照片(近三個月)',
         }
 
+
+class LoginModelForm(forms.ModelForm):
     
+    class Meta:
+        model = Member
+        fields = ('email','password')
+
+        widgets = {
+            'email':forms.EmailInput(attrs={'class': 'form-control'}),
+            'password':forms.PasswordInput(attrs={'class': 'form-control'}),
+        }
+        
+        labels = {
+            'email': '電子信箱',
+            'password': '密碼'
+        }

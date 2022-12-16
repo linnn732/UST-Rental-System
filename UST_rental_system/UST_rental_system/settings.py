@@ -12,8 +12,17 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+#Boostrap Alert Color
+from django.contrib.messages import constants as message_constants
+MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
+                message_constants.INFO: 'info',
+                message_constants.SUCCESS: 'success',
+                message_constants.WARNING: 'warning',
+                message_constants.ERROR: 'danger',}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEMBER__DIR = Path.joinpath(BASE_DIR,'Member')
 MEMBER_TAMPLATE_DIR = Path.joinpath(BASE_DIR,'Member/template') #登入、註冊
 #print(TAMPLATE_DIR)
 
@@ -118,7 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATICFILES_DIRS = (
+    Path.joinpath(BASE_DIR, 'static'),
+)
 
 MEDIA_URL = '/image/'
 MEDIA_ROOT = Path.joinpath(MEMBER_TAMPLATE_DIR, 'image')
