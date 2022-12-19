@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 #Boostrap Alert Color
 from django.contrib.messages import constants as message_constants
@@ -23,7 +24,12 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEMBER__DIR = Path.joinpath(BASE_DIR,'Member')
-MEMBER_TAMPLATE_DIR = Path.joinpath(BASE_DIR,'Member/template') #登入、註冊
+MEMBER_TEMPLATE_DIR = Path.joinpath(BASE_DIR,'Member/template') #登入、註冊
+ES_management_TEMPLATE_DIR = Path.joinpath(BASE_DIR,'ES_management/template') #場材管理
+Order_management_TEMPLATE_DIR = Path.joinpath(BASE_DIR,'Order_management/template') 
+Member_management_TEMPLATE_DIR = Path.joinpath(BASE_DIR,'Member_management/template') 
+
+
 #print(TAMPLATE_DIR)
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +44,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +55,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "Member",
+    "ES_management",
+    "Order_management",
+    "Member_management"
 ]
 
 MIDDLEWARE = [
@@ -65,7 +75,7 @@ ROOT_URLCONF = "UST_rental_system.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [MEMBER_TAMPLATE_DIR,],
+        "DIRS": [MEMBER_TEMPLATE_DIR, ES_management_TEMPLATE_DIR,Order_management_TEMPLATE_DIR,Member_management_TEMPLATE_DIR],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,9 +99,9 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ust_rental_system', # 資料庫名字
+        'NAME': 'aaa', # 資料庫名字
         'USER': "root",  # mysql 使用者名稱稱
-        'PASSWORD': 'Aa980411',  # 資料庫的密碼
+        'PASSWORD': 'liting',  # 資料庫的密碼
         'HOST': "127.0.0.1",  # 資料庫服務地址， 這裡我們是測試開發 填本地地址 
         'PORT': 3306,   # mysql 對應的埠號 
         'default-character-set': "UTF8",  # 設定編碼規則 utf8
@@ -133,7 +143,7 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/image/'
-MEDIA_ROOT = Path.joinpath(MEMBER_TAMPLATE_DIR, 'image')
+MEDIA_ROOT = Path.joinpath(MEMBER_TEMPLATE_DIR, 'image')
 
 
 
@@ -142,3 +152,8 @@ MEDIA_ROOT = Path.joinpath(MEMBER_TAMPLATE_DIR, 'image')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STATIC_URL = "/static/"
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)

@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from .forms import MemberModelForm, LoginModelForm
+from .forms import *
 from .models import Member
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-
 
 def register(request):
     form = MemberModelForm()
@@ -22,7 +21,6 @@ def register(request):
             #return redirect('register')
     
     context['form']=form
-
     return render(request, 'register.html', context)
 
 # 會員登入
@@ -54,7 +52,63 @@ def login(request):
                 return HttpResponseRedirect(request.path_info)
     
     context['form']=form
-    return render(request, 'login.html', context)            
+    return render(request, 'login.html', context)        
+
+#修改會員資料（未更改）
+@csrf_exempt
+def edit_member(request):
+
+    if request.method == "POST":
+
+        data = request.POST
+        
+        email = data.get('email')
+        old_password = data.get('old_password')
+        new_password = data.get('new_password')
+        new_tel_number = data.get('tel_number')
+
+        if Member.objects.filter(email=email, password=old_password).exists():
+            print("有")
+            Member.objects.filter(email=email).update(password=new_password,tel=new_tel_number)
+            messages.success(request, "修改成功")
+        else:
+            print("沒有")
+            messages.error(request, "名字或密碼輸入錯誤，請重新輸入")
+
+    return render(request, 'member-nu_edit.html')
+
+
+def search_nu_site(request):
+    context = {}
+    if request.method == "POST":
+        school = request.POST['school']
+        usage = request.POST['usage']
+        date = request.POST['date']
+        start = int(request.POST['start'])
+        end = int(request.POST['end'])
+
+        end_first = start+1
+        start_last =end-1
+
+        result = Duration.objects.filter(
+        site_id__department_id__school_id = school,
+    site_id__usage = usage,
+    date = date,
+    rent_status = 0,
+    start__gte = start,
+    start__lte = start_last,
+    end__gte = end_first,
+    end__lte = end
+            )
+
+        context["condition_query_set"] = result
+        return render(request, "index.html", context)
+
+    return render(request, "index.html", context)
+    
+  
+
+    
 
 
     
