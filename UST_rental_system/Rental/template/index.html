@@ -63,14 +63,20 @@
         <div class="container">
 
             {% for obj in condition_query_set %}
+                {% ifchanged %}
+                    <h3>{{obj.site_id.name}}</h3>
+                    {{obj.site_id.usage}}<br/>
+                    {{obj.site_id.price}}<br/>
+                    {{obj.site_id.rule}}<br/>
+                {% endifchanged %}
+            
+            
                 {{obj.id}}<br/>
                 {{obj.date}}<br/>
                 {{obj.start}}<br/>
                 {{obj.end}}<br/>
-                {{obj.site_id}}<br/>
-                {{obj.site_id.usage}}<br/>
-                {{obj.site_id.price}}<br/>
-                {{obj.site_id.rule}}<br/>
+
+            
             {% endfor %}
           
         </div>

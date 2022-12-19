@@ -26,8 +26,8 @@ class Site(models.Model):
     
     department_id = models.ForeignKey('Department', db_column='department_id', on_delete=models.CASCADE)
     
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
 
     class Meta:
         db_table = 'site'
